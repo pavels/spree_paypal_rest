@@ -50,7 +50,7 @@ module Spree
 
     def paypal_express_cancel
       flash[:error] = Spree.t(:payment_has_been_cancelled)
-      redirect_to edit_order_path(@order)
+      redirect_to checkout_path
     end
 
     private

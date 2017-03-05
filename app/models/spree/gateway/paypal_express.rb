@@ -53,7 +53,7 @@ module Spree
       sale = PayPal::SDK::REST::Sale.find(sale_id)
       paypal_refund = sale.refund_request({
         amount:{
-          total: amount,
+          total: '%.2f' % amount,
           currency: options[:currency]
         }
       })

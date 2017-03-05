@@ -21,20 +21,20 @@ module Spree
           }
         },
         redirect_urls: {
-          return_url: Store.current.url + Core::Engine.routes.url_helpers.paypal_express_return_order_checkout_path(order.id),
-          cancel_url: Store.current.url + Core::Engine.routes.url_helpers.paypal_express_cancel_order_checkout_path(order.id),
+          return_url: "https://" + Store.current.url + Core::Engine.routes.url_helpers.paypal_express_return_order_checkout_path(order.id),
+          cancel_url: "https://" + Store.current.url + Core::Engine.routes.url_helpers.paypal_express_cancel_order_checkout_path(order.id),
         },
         transactions:[{
           item_list:{
             items: order_line_items(order)
           },
           amount: {
-            total: order.total.to_s,
+            total: '%.2f' % order.total,
             currency: order.currency,
             details:{
-              shipping: order.shipments.map(&:discounted_cost).sum,
-              subtotal: order.item_total.to_s,
-              tax: order.additional_tax_total.to_s
+              shipping: '%.2f' % order.shipments.map(&:discounted_cost).sum,
+              subtotal: '%.2f' % order.item_total,
+              tax: '%.2f' % order.additional_tax_total
             }
           },
           description: 'This is the sale description',
@@ -49,7 +49,7 @@ module Spree
         items << {
           name: item.product.name,
           sku: item.product.sku,
-          price: item.price.to_s,
+          price: '%.2f' % item.price,
           currency: item.order.currency,
           quantity: item.quantity
         }
@@ -62,7 +62,7 @@ module Spree
         next if adj.source_type.eql?('Spree::PromotionAction')
         items << {
           name: adj.label,
-          price: adj.amount.to_s,
+          price: '%.2f' % adj.amount,
           currency: order.currency,
           quantity: 1
         }
