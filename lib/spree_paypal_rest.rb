@@ -1,4 +1,4 @@
-require 'byebug'
+require 'byebug' if Rails.env.development?
 require 'paypal-sdk-rest'
 require 'spree'
 require 'spree_core'
