@@ -78,7 +78,7 @@ module Spree
         country_code: order.billing_address.country.iso,
         postal_code: order.billing_address.zipcode,
         phone: order.billing_address.phone,
-        state: order.billing_address.state.name
+        state: order.billing_address.state ? order.billing_address.state.name : ''
       }
     end
 
