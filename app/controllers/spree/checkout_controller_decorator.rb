@@ -5,7 +5,7 @@ module Spree
     def paypal_express
       if @order.update_from_params(params, permitted_checkout_attributes, request.headers.env)
         @payment_method = PaymentMethod.find(params[:order][:payments_attributes].first[:payment_method_id])
-        @payment = @payment_method.request_payment(@order)
+        @payment = @payment_method.request_payment(@order, paypal_express_return_order_checkout_url(@order), paypal_express_cancel_order_checkout_url(@order))
         if @payment.create
           @redirect_url = @payment.links.find{|v| v.method == "REDIRECT" }.href
           redirect_to @redirect_url

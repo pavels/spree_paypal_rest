@@ -28,9 +28,9 @@ module Spree
       'paypal_express'
     end
 
-    def request_payment(order)
+    def request_payment(order, return_url, cancel_url)
       provider
-      payment(order, first_or_new(profile_options).id)
+      payment(order, first_or_new(profile_options).id, return_url, cancel_url)
     end
 
     def purchase(amount, source, options)

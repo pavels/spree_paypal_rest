@@ -1,13 +1,13 @@
 module Spree
   module Gateway::PaypalPayment
 
-    def payment(order, web_profile_id)
-      payment_options = payment_payload(order, web_profile_id)
+    def payment(order, web_profile_id, return_url, cancel_url)
+      payment_options = payment_payload(order, web_profile_id, return_url, cancel_url)
       @payment = PayPal::SDK::REST::DataTypes::Payment.new(payment_options)
       return @payment
     end
 
-    def payment_payload(order, web_profile_id)
+    def payment_payload(order, web_profile_id, return_url, cancel_url)
       payload = {
         intent: 'sale',
         experience_profile_id: web_profile_id,
@@ -21,8 +21,8 @@ module Spree
           }
         },
         redirect_urls: {
-          return_url: "https://" + Store.current.url + Core::Engine.routes.url_helpers.paypal_express_return_order_checkout_path(order.id),
-          cancel_url: "https://" + Store.current.url + Core::Engine.routes.url_helpers.paypal_express_cancel_order_checkout_path(order.id),
+          return_url: return_url,
+          cancel_url: cancel_url,
         },
         transactions:[{
           item_list:{
