@@ -70,8 +70,8 @@ module Spree
       end
     end
 
-    def cancel(spree_payment_id)
-      spree_payment = Spree::Payment.find(spree_payment_id)
+    def cancel(response)
+      spree_payment = Spree::Payment.where(response_code: response).first
       refund(spree_payment.amount, spree_payment.source, {currency: spree_payment.currency})
     end
 

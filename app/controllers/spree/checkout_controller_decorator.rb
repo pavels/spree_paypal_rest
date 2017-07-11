@@ -28,13 +28,14 @@ module Spree
       
       if payment.present?
         if payment.payment_method.kind_of?(Spree::Gateway::PaypalExpress)
-          payment.update!({source: paypal_checkout})
+          payment.update!({source: paypal_checkout, response_code: params[:paymentId]})
         end
       else
         @order.payments.create!({
           source: paypal_checkout,
           amount: @order.total,
-          payment_method: @order.payments.last.payment_method
+          payment_method: @order.payments.last.payment_method,
+          response_code: params[:paymentId]
         })
       end
 
