@@ -1,0 +1,16 @@
+---
+en:
+  spree:
+    payment_has_been_cancelled: "Die Zahlung wurde Storniert."
+    complete_checkout: "Bitte beenden Sie Paypal Express Checkout bevor Sie weitermachen"
+    paypal_express_checkout: Paypal Express Checkout
+    paypal_transaction: Transaktion
+    paypal_state: Zahlungsstatus
+    paypal_token: Token
+    paypal_payer_id: Zahler ID
+    paypal_payment_id: Transaktions ID
+    paypal_refund_id: "Rückerstattungs ID"
+    paypal_refund_type: "Rückerstattungstyp"
+    paypal_refunded_at: "Rückerstattung zu"
+    paypal_information: "PayPal ist eine einfache und sichere Zahlungsmethode, die es Ihnen erlaubt auf Webseiten und in Apps aus der ganzen Welt zu bezahlen, ohne ihre Kreditkartendetails zu teilen."
+     
