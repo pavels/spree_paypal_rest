@@ -1,6 +1,6 @@
 module Spree
   CheckoutController.class_eval do
-    before_filter :paypal_rest_hook, only: :update, if: proc { params[:state].eql?('payment') }
+    before_action :paypal_rest_hook, only: :update, if: proc { params[:state].eql?('payment') }
     
     def paypal_express
       if @order.update_from_params(params, permitted_checkout_attributes, request.headers.env)
