@@ -77,7 +77,7 @@ module Spree
 
     def credit(amount, source, options)
       origin = options[:originator]
-      fixed_amount = Money.new(amount * 0.01).money.to_s
+      fixed_amount = Money.new(amount * 0.01).money
       refund(fixed_amount, origin.payment.source, {currency: origin.payment.currency, originator: origin})
     end
 
