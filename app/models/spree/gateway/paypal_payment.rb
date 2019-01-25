@@ -8,6 +8,20 @@ module Spree
     end
 
     def payment_payload(order, web_profile_id, return_url, cancel_url)
+      
+      #paypal don't like it if the subtotal don't add up
+      #If we have Promo we have to change sub_total
+      #TODO: Update for TaxRate, Shipment 
+      sub_total = 0
+      order.all_adjustments.eligible.each do |adj|
+          if (adj.source_type.eql?('Spree::PromotionAction'))
+           sub_total = sub_total + adj.amount
+          end
+      end
+      sub_total = sub_total + order.item_total
+      
+      
+      
       payload = {
         intent: 'sale',
         experience_profile_id: web_profile_id,
